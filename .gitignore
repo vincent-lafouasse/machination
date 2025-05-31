@@ -1,0 +1,9 @@
+exe
+*.dSYM/
+
+zig-out/
+.zig-cache/
+
+.DS_Store
+*_local
+.cache
