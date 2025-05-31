@@ -16,6 +16,10 @@ pub const String = struct {
         self.data.deinit();
     }
 
+    pub fn asSlice(self: *const Self) []const u8 {
+        return self.data.items;
+    }
+
     pub fn readline(reader: anytype, allocator: Allocator) !String {
         var out = String.init(allocator);
 

@@ -2,6 +2,7 @@ const std = @import("std");
 const Allocator = std.mem.Allocator;
 
 const String = @import("String.zig").String;
+const Token = @import("Token.zig").Token;
 
 pub fn main() !void {
     const stdout = std.io.getStdOut().writer();
@@ -21,5 +22,8 @@ pub fn main() !void {
         defer line.deinit();
 
         try stdout.print("{s}\n", .{line});
+
+        const tokens = Token.tokenize(line.asSlice(), allocator);
+        defer tokens.deinit();
     }
 }
