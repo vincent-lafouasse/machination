@@ -1,7 +1,12 @@
 const std = @import("std");
 const Allocator = std.mem.Allocator;
 
-pub const Token = struct {};
+pub const Token = union(enum) {
+    LeftParen: void,
+    RightParen: void,
+    Identifier: []const u8,
+    Directive: []const u8,
+};
 
 pub const Lexer = struct {
     input: []const u8,
