@@ -3,6 +3,7 @@ const Allocator = std.mem.Allocator;
 
 const String = @import("String.zig").String;
 const Token = @import("Token.zig").Token;
+const Lexer = @import("Token.zig").Lexer;
 
 pub fn main() !void {
     const stdout = std.io.getStdOut().writer();
@@ -23,7 +24,9 @@ pub fn main() !void {
 
         try stdout.print("{s}\n", .{line});
 
-        const tokens = Token.tokenize(line.asSlice(), allocator);
+        var lexer = Lexer.init(line.asSlice());
+
+        const tokens = lexer.tokenize(allocator);
         defer tokens.deinit();
     }
 }
