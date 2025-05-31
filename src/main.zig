@@ -12,7 +12,12 @@ pub fn main() !void {
     while (true) {
         try stdout.print("> ", .{});
 
-        var line = try String.readline(stdin, allocator);
+        var line = String.readline(stdin, allocator) catch |err| {
+            switch (err) {
+                std.io.AnyReader.Error.EndOfStream => return,
+                else => return err,
+            }
+        };
         defer line.deinit();
 
         try stdout.print("{s}\n", .{line});
