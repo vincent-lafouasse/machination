@@ -2,10 +2,27 @@ const std = @import("std");
 const Allocator = std.mem.Allocator;
 
 pub const Token = union(enum) {
+    Number: []const u8,
+    Boolean: bool,
+    Symbol: []const u8,
+    Character: u8,
+    String: []const u8,
+    Identifier: []const u8,
+    Lambda: void,
+    If: void,
+    Quote: void,
+    Letrec: void,
+    Begin: void,
+    Set: void,
+    Define: void,
+    Let: void,
+    Cond: void,
+    And: void,
+    Or: void,
+    Delay: void,
+    ConsStream: void,
     LeftParen: void,
     RightParen: void,
-    Identifier: []const u8,
-    Directive: []const u8,
     EndOfFile: void,
 };
 
